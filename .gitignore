@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 # Place data for non local DVC
-# /data 
+data/*.csv
 *.sav
+/data
