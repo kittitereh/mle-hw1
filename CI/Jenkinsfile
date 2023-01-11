@@ -24,8 +24,7 @@ options {
         stage('Clone dvc repository') {
             steps {
                 sh '''
-                    dvc remote modify storage gdrive_acknowledge_abuse true
-                    git pull
+                    cd mle-hw1
                     dvc pull
                 '''
 				}
