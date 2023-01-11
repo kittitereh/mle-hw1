@@ -17,16 +17,16 @@ options {
         stage('Clone github repository') {
             steps {
                 cleanWs()
-                sh 'git clone -b main https://github.com/kittitereh/mle-hw1.git'
+                sh 'git clone -b develop https://github.com/kittitereh/mle-hw1.git'
 				}
 			}
 
         stage('Clone dvc repository') {
             steps {
                 sh '''
-                    cd data
-                    dvc get gdrive://1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq
-                    cd ..
+                    git clone --no-hardlinks /data
+                    dvc pull
+
                 '''
 				}
 			}
