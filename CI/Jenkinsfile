@@ -21,6 +21,13 @@ options {
 				}
 			}
 
+        stage('Clone dvc repository') {
+            steps {
+                sh 'dvc clone -b main gdrive://1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq'
+				}
+			}
+
+
         // stage('Checkout repo dir') {
         //     steps {
         //         sh 'chcp 65001 && cd mle-hw1 && dir'
@@ -59,23 +66,23 @@ options {
         //use for single container (with auth):
         //docker run --name mle-template_web_1 cd app && coverage run src/unit_tests/test_preprocess.py && coverage run -a src/unit_tests/test_training.py && coverage report -m
 
-        stage('Checkout container logs') {
-            steps {
-                dir("mle-hw1") {
-                        sh '''
-                            docker-compose up -d
-                            for /f %%i in ('docker ps -qf "name=^mle-hw1-web-1"') do set containerId=%%i
-                            echo %containerId%
-                            IF "%containerId%" == "" (
-                                echo "No container running"
-                            )
-                            ELSE (
-                                docker logs --tail 1000 -f %containerId%
-                                )
-                        '''
-                    }
-            }
-        }
+        // stage('Checkout container logs') {
+        //     steps {
+        //         dir("mle-hw1") {
+        //                 sh '''
+        //                     docker-compose up -d
+        //                     for /f %%i in ('docker ps -qf "name=^mle-hw1-web-1"') do set containerId=%%i
+        //                     echo %containerId%
+        //                     IF "%containerId%" == "" (
+        //                         echo "No container running"
+        //                     )
+        //                     ELSE (
+        //                         docker logs --tail 1000 -f %containerId%
+        //                         )
+        //                 '''
+        //             }
+        //     }
+        // }
 
         stage('Checkout coverage report'){
             steps{
