@@ -24,8 +24,9 @@ options {
         stage('Clone dvc repository') {
             steps {
                 sh '''
-                    dvc checkout
+                    cd data
                     dvc get gdrive://1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq
+                    cd ..
                 '''
 				}
 			}
