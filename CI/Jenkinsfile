@@ -23,7 +23,7 @@ options {
 
         stage('Clone dvc repository') {
             steps {
-                sh 'dvc clone -b main gdrive://1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq'
+                sh 'dvc fetch gdrive://1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq'
 				}
 			}
 
