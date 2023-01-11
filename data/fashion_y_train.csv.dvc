@@ -1,0 +1,4 @@
+outs:
+- md5: 232b055562b1422d050a0835fb27ae99
+  size: 697783
+  path: fashion_y_train.csv
