@@ -24,6 +24,7 @@ options {
         stage('Clone dvc repository') {
             steps {
                 sh '''
+                    pip install dvc[grive]
                     cd mle-hw1
                     dvc pull
                 '''
