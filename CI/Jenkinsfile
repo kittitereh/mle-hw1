@@ -21,14 +21,6 @@ options {
 				}
 			}
 
-        stage('download data') {
-            steps {
-                sh '''
-                    wget https://drive.google.com/drive/folders/1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq
-                '''
-				}
-			}
-
 
 
         // stage('Checkout repo dir') {
