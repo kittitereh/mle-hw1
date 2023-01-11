@@ -21,13 +21,10 @@ options {
 				}
 			}
 
-        stage('Clone dvc repository') {
+        stage('download data') {
             steps {
                 sh '''
-                    pip install dvc_gdrive
-                    dvc remote modify --local storage url gdrive://1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq
-                    cd mle-hw1
-                    dvc pull
+                    wget https://drive.google.com/drive/folders/1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq -P /data
                 '''
 				}
 			}
