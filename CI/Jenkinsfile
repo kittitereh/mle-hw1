@@ -25,7 +25,7 @@ options {
             steps {
                 sh '''
                     pip install dvc_gdrive
-                    dvc remote modify --global storage
+                    dvc remote modify --global storage url gdrive://1FAaklrbH2T22XuLnmhrz-sLueD_hBwjq
                     cd mle-hw1
                     dvc pull
                 '''
