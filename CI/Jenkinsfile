@@ -24,9 +24,7 @@ options {
         stage('Clone dvc repository') {
             steps {
                 sh '''
-                    git clone --no-hardlinks /data
                     dvc pull
-
                 '''
 				}
 			}
