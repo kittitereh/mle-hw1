@@ -21,15 +21,6 @@ options {
 				}
 			}
 
-        stage('Clone dvc repository') {
-            steps {
-                sh '''
-                    pip install dvc[grive]
-                    cd mle-hw1
-                    dvc pull
-                '''
-				}
-			}
 
 
         // stage('Checkout repo dir') {
@@ -64,6 +55,15 @@ options {
 				    }
                 }
             }
+
+        stage('Clone dvc repository') {
+            steps {
+                sh '''
+                    cd mle-hw1
+                    dvc pull
+                '''
+				}
+			}
 
         // use for multi containers:
         //docker exec %containerId% cd app && coverage run src/unit_tests/test_preprocess.py && coverage run -a src/unit_tests/test_training.py && coverage report -m
