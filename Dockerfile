@@ -8,3 +8,5 @@ COPY . .
 
 RUN pip install -r requirements.txt
 
+RUN pip install dvc[gdrive]
+
