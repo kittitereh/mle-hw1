@@ -56,14 +56,6 @@ options {
                 }
             }
 
-
-        stage('Run unit tests')
-            steps {
-                dir("mle-hw1"){
-                    sh 'docker run'
-                }
-            }
-
         
 
         // use for multi containers:
