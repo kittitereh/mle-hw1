@@ -56,6 +56,14 @@ options {
                 }
             }
 
+
+        stage('Run unit tests')
+            steps {
+                dir("mle-hw1"){
+                    sh 'docker run'
+                }
+            }
+
         
 
         // use for multi containers:
@@ -81,19 +89,15 @@ options {
         //     }
         // }
 
-        stage('Checkout coverage report'){
-            steps{
-                dir("mle-hw1"){
-                    sh '''
-                    docker-compose logs -t --tail 10
-                    '''
-                }
-            }
-        }
+
+
 
         stage('Push'){
             steps{
-                sh 'docker push kittitereh/mle-hw1:latest'
+                sh '''
+                docker login -u=kittitereh -p=moroge123
+                docker push kittitereh/mle-hw1:latest
+                '''
             }
         }
 	}
