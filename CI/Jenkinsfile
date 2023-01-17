@@ -91,7 +91,7 @@ options {
                 docker login -u=kittitereh -p=moroge123
                 }
             steps{
-                sh('curl -u=${} -p=${}')
+                sh('curl -u=${BITBUCKET_COMMON_CREDS_USR} -p=${BITBUCKET_COMMON_CREDS_PSW}')
             }
         }
 	}
