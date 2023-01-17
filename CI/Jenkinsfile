@@ -84,12 +84,22 @@ options {
 
 
 
+        stage('Docker login'){
+        
+            environment {
+                BITBUCKET_COMMON_CREDS = credentials('5dbe3482-2e8f-4bbb-a794-2cb838bc0d21')
+                docker login -u=kittitereh -p=moroge123
+                }
+            steps{
+                sh('curl -u=${} -p=${}')
+            }
+        }
+	}
+
+
         stage('Push'){
             steps{
-                sh '''
-                docker login -u=kittitereh -p=moroge123
-                docker push kittitereh/mle-hw1:latest
-                '''
+                sh 'docker push kittitereh/mle-hw1:latest'
             }
         }
 	}
