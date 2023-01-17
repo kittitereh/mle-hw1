@@ -90,7 +90,7 @@ options {
                 BITBUCKET_COMMON_CREDS = credentials('5dbe3482-2e8f-4bbb-a794-2cb838bc0d21')
                 }
             steps{
-                sh('curl -u=${BITBUCKET_COMMON_CREDS_USR} -p=${BITBUCKET_COMMON_CREDS_PSW}')
+                sh('curl -u ${BITBUCKET_COMMON_CREDS_USR} -p ${BITBUCKET_COMMON_CREDS_PSW}')
             }
         }
 	
