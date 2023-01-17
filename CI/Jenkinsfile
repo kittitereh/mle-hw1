@@ -93,15 +93,14 @@ options {
                 sh('curl -u=${BITBUCKET_COMMON_CREDS_USR} -p=${BITBUCKET_COMMON_CREDS_PSW}')
             }
         }
-	}
-
-
+	
         stage('Push'){
             steps{
                 sh 'docker push kittitereh/mle-hw1:latest'
             }
         }
-	}
+    }
+    }
 
     post {
         always {
