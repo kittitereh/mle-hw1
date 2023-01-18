@@ -1,48 +1,72 @@
 pipeline {
     agent any
 
-    environment {
-        DOCKERHUB_CREDS=credentials('mle-template')
-        LC_ALL = "en_US.UTF-8"
-        LANG    = "en_US.UTF-8"
-        LANGUAGE = "en_US.UTF-8"
-    }
-
 options {
         timestamps()
         skipDefaultCheckout(true)
 	}
     stages {
+    
+        stage('Clone github repository') {
+            steps {
+                cleanWs()
+                sh 'git clone -b develop https://github.com/kittitereh/mle-hw1.git'
+				}
+			}
 
-        stage('Login'){
-            steps{
-                //withCredentials([usernamePassword(credentialsId: 'mle-hw1', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]){
-                //bat 'chcp 65001 && echo %DOCKER_REGISTRY_PWD% | docker login -u %DOCKER_REGISTRY_USER% --password-stdin'}
-                //bat 'chcp 65001 && echo %DOCKERHUB_CREDS_PSW% | docker login -u %DOCKERHUB_CREDS_USR% --password-stdin'
-                bat 'docker login -u %DOCKERHUB_CREDS_USR% -p %DOCKERHUB_CREDS_PSW%'
+      
+     
+        
+        stage('Create and run docker container') {
+            steps {
+                script {
+                    try {
+                        sh 'cd mle-hw1 && docker-compose build'
+                        }
+
+                    finally {
+                    sh '''
+                        cd mle-hw1
+                        docker-compose up -d
+                        '''
+                        }
+				    }
                 }
             }
 
-        stage('Pull image'){
+
+         stage('Docker login'){
+        
+            environment {
+                BITBUCKET_COMMON_CREDS = credentials('5dbe3482-2e8f-4bbb-a794-2cb838bc0d21')
+                }
             steps{
-                bat '''
-                        docker pull kittitereh/mle-hw1:latest
-                '''
+                sh('docker login -u ${BITBUCKET_COMMON_CREDS_USR} -p ${BITBUCKET_COMMON_CREDS_PSW}')
             }
         }
 
-        stage('Run container'){
+
+        stage('Checkout coverage report'){
             steps{
-                bat '''
-                        docker run --name mle-hw1 -p 80:5556 -d kittitereh/mle-hw1:latest
-                '''
+                dir("mle-hw1"){
+                    sh '''
+                    docker-compose logs -t --tail 10
+                    '''
+                }
+            }
+        }
+
+        
+        stage('Pull'){
+            steps{
+                sh 'docker pull kittitereh/mle-hw1:latest'
             }
         }
 	}
 
     post {
         always {
-            bat 'docker stop mle-hw1 && docker logout'
+            sh 'docker logout'
         }
     }
 }

@@ -4,6 +4,7 @@ services:
   web:
     build: .
     command: bash -c "python3 src/preprocess.py && python3 src/train.py && python3 src/predict.py -m KNN -t func"
+             bash -c "coverage run src/unit-tests/test_preprocess.py && coverage run -a src/unit-tests/test_train -m KNN -t func"
     ports:
       - 8000:8000
     image: kittitereh/mle-hw1:latest
